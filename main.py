@@ -23,7 +23,7 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
               ]
 
 camera = rs.RealSense((1280, 720), 30)
-object_dtector = od.ObjectDetection("yolo-Weights/yolov8n.pt", classNames)
+object_dtector = od.ObjectDetection("yolo-Weights/yolov8x.pt", classNames)
 
 try:
     while True:

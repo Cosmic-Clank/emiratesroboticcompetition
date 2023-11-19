@@ -8,7 +8,7 @@ class ObjectDetection:
         self.model = YOLO(path_to_model)
         self.labels = labels
         
-    def get_infered_image(self, np_image, depth_frame):
+    def get_infered_image(self, np_image, depth_frame=None):
         results = self.model.predict(np_image, verbose=False)
         infered_image = np_image.copy()
         
@@ -39,9 +39,12 @@ class ObjectDetection:
                 thickness = 2
                 center = (int(x1 + (x2-x1)/2), int(y1 + (y2-y1)/2))
                 
-                distance = depth_frame.get_distance(center[0], center[1])
+                if depth_frame:
+                    distance = depth_frame.get_distance(center[0], center[1])
+                else:
+                    distance = 0
+                    
                 cv2.circle(infered_image, center, 5, (0, 0, 255), -1)
-
                 cv2.rectangle(infered_image, (x1, y1 - 20), (x2, y1), (255, 0, 255), -1)
                 cv2.putText(infered_image, f"{self.labels[cls].upper()} CONF: {confidence} CORDS: {center} DIST: {distance:.2f}m", org, font, fontScale, color, thickness)
 
