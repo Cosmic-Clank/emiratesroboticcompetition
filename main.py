@@ -1,14 +1,8 @@
-## License: Apache 2.0. See LICENSE file in root directory.
-## Copyright(c) 2015-2017 Intel Corporation. All Rights Reserved.
-
-###############################################
-##      Open CV and Numpy integration        ##
-###############################################
-
 import modules.realsense as rs
 import modules.object_detection as od
 import numpy as np
 import cv2
+import time
 
 classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat",
               "traffic light", "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat",
@@ -25,7 +19,10 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
 camera = rs.RealSense((1280, 720), 30)
 object_dtector = od.ObjectDetection("yolo-Weights/yolov8x.pt", classNames)
 
+
 try:
+    frames_count = 0
+    start_time = time.time()
     while True:
         color_image, depth_image, depth_frame = camera.captureFrame()
         if not np.any(color_image) or not np.any(depth_image) or not np.any(depth_frame):
@@ -36,10 +33,13 @@ try:
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
         cv2.imshow('RealSense', infered_image)
         key = cv2.waitKey(1)
-        # Press esc or 'q' to close the image window
+        
+        frames_count += 1
+        
         if key & 0xFF == ord('q') or key == 27:
             cv2.destroyAllWindows()
             break
 
 finally:
+    print(f"Average FPS:    {frames_count / (time.time() - start_time)}")
     camera.stopCamera()
