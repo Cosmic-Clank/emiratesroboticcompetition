@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import time
 
-classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat",
+default_yolo_model = ("yolo-Weights/yolov8x.pt", ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat",
               "traffic light", "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat",
               "dog", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella",
               "handbag", "tie", "suitcase", "frisbee", "skis", "snowboard", "sports ball", "kite", "baseball bat",
@@ -14,10 +14,14 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
               "diningtable", "toilet", "tvmonitor", "laptop", "mouse", "remote", "keyboard", "cell phone",
               "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors",
               "teddy bear", "hair drier", "toothbrush"
-              ]
+              ])
+
+trained_trash_model = ("yolo-Weights/best.pt", ['GLASS', 'METAL', 'PAPER', 'PLASTIC'])
+
+
+object_dtector = od.ObjectDetection(*default_yolo_model)
 
 camera = rs.RealSense((1280, 720), 30)
-object_dtector = od.ObjectDetection("yolo-Weights/yolov8x.pt", classNames)
 
 
 try:

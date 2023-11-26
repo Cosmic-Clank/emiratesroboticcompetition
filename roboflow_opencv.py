@@ -6,7 +6,7 @@ rf = Roboflow(api_key="VKi8pA7O3w2d15dgVoDs")
 project = rf.workspace().project("yolo-waste-detection")
 model = project.version(1).model
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(2)
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
