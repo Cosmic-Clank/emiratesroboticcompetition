@@ -19,7 +19,7 @@ default_yolo_model = ("yolo-Weights/yolov8x.pt", ["person", "bicycle", "car", "m
 trained_trash_model = ("yolo-Weights/best.pt", ['GLASS', 'METAL', 'PAPER', 'PLASTIC'])
 
 
-object_dtector = od.ObjectDetection(*default_yolo_model)
+object_detector = od.ObjectDetection(*default_yolo_model)
 
 camera = rs.RealSense((1280, 720), 30)
 
@@ -32,7 +32,8 @@ try:
         if not np.any(color_image) or not np.any(depth_image) or not np.any(depth_frame):
             continue
         
-        infered_image = object_dtector.get_infered_image(color_image, depth_frame)
+        object_detector.infer_image(color_image, depth_frame)
+        infered_image = object_detector.get_infered_image()
         
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
         cv2.imshow('RealSense', infered_image)

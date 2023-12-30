@@ -27,7 +27,8 @@ while True:
         print("Can't receive frame (stream end?). Exiting ...")
         break
 
-    infered_image = object_detector.get_infered_image(frame)
+    object_detector.infer_image(frame)
+    infered_image = object_detector.get_infered_image()
 
     cv2.imshow('Object Detection', infered_image)
 
