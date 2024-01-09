@@ -3,7 +3,7 @@ from pupil_apriltags import Detector
 import cv2
 import numpy as np
 
-class Apriltag(Detector):
+class AprilTag(Detector):
     def __init__(self, 
                 families="tagStandard41h12", 
                 nthreads=1, 
