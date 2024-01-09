@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 
 class RealSense:
-    def __init__(self, capture_shape, capture_framerate):
+    def __init__(self, capture_shape = (1280, 720), capture_framerate = 30):
         self.pipeline = rs.pipeline()
         self.config = rs.config()
 
@@ -37,7 +37,7 @@ class RealSense:
         # Start streaming
         self.pipeline.start(self.config)
         
-    def captureFrame(self):
+    def capture_frame(self):
         frames = self.pipeline.wait_for_frames()
         depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
@@ -53,5 +53,5 @@ class RealSense:
 
         return color_image, depth_colormap, depth_frame
     
-    def stopCamera(self):
+    def stop_camera(self):
         self.pipeline.stop()

@@ -28,7 +28,7 @@ try:
     frames_count = 0
     start_time = time.time()
     while True:
-        color_image, depth_image, depth_frame = camera.captureFrame()
+        color_image, depth_image, depth_frame = camera.capture_frame()
         if not np.any(color_image) or not np.any(depth_image) or not np.any(depth_frame):
             continue
         
@@ -47,4 +47,4 @@ try:
 
 finally:
     print(f"Average FPS:    {frames_count / (time.time() - start_time)}")
-    camera.stopCamera()
+    camera.stop_camera()
