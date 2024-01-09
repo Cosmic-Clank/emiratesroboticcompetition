@@ -1,6 +1,7 @@
 import cv2
 import modules.object_detection as od
 import pickle
+import modules.realsense as rs
 
 # Create an empty dictionary to store bounding box information
 bounding_boxes = []
@@ -31,19 +32,14 @@ cv2.namedWindow("Snapshot")
 cv2.setMouseCallback("Snapshot", draw_rectangle)
 
 # Open the camera
-cap = cv2.VideoCapture(0)
-
-# Check if the camera is opened successfully
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
+camera = rs.RealSense()
 
 # Capture a snapshot from the camera
-ret, frame = cap.read()
-cap.release()
+img, _, _ = camera.capture_frame()
+camera.stop_camera()
 
 # Make a copy of the image for drawing
-img_copy = frame.copy()
+img_copy = img.copy()
 
 # Variables for drawing rectangles
 drawing = False
