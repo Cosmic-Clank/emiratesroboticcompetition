@@ -48,6 +48,7 @@ class Apriltag(Detector):
             direction_vector = direction_vector / np.linalg.norm(direction_vector)
             
             gripper_point = result.center + direction_vector * math.dist(result.corners[1], result.corners[0]) * 1.5
+            result.gripper_point = gripper_point
 
             cv2.circle(marked_img, (int(gripper_point[0]), int(gripper_point[1])), 10, (255, 0, 0), -1)
 
