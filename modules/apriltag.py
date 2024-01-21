@@ -5,20 +5,20 @@ import numpy as np
 
 class AprilTag(Detector):
     def __init__(self, 
-                families="tagStandard41h12", 
-                nthreads=1, 
-                quad_decimate=1.0, 
-                quad_sigma=0.0, 
-                refine_edges=1, 
-                decode_sharpening=0.25, 
+                families="tagStandard41h12",
+                nthreads=1,
+                quad_decimate=1.0,
+                quad_sigma=0.0,
+                refine_edges=1,
+                decode_sharpening=0.25,
                 debug=0):
         
-        super().__init__(families=families, 
-                        nthreads=nthreads, 
-                        quad_decimate=quad_decimate, 
-                        quad_sigma=quad_sigma, 
-                        refine_edges=refine_edges, 
-                        decode_sharpening=decode_sharpening, 
+        super().__init__(families=families,
+                        nthreads=nthreads,
+                        quad_decimate=quad_decimate,
+                        quad_sigma=quad_sigma,
+                        refine_edges=refine_edges,
+                        decode_sharpening=decode_sharpening,
                         debug=debug)
         
         self.results = []
@@ -31,6 +31,8 @@ class AprilTag(Detector):
         if results:
             self.results = results
             # print(results)
+        else:
+            self.results = []
         
     def get_results(self):
         return self.results
